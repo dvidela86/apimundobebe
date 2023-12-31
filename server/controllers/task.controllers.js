@@ -1,5 +1,6 @@
-import { Router } from "express"
-import pool from "../db.js"
+const express = require("express");
+const { Router } = express;
+const pool = require("../db.js");
 
 
 
