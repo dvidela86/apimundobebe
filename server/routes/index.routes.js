@@ -1,15 +1,17 @@
-import {Router} from "express";
-import pool from "../db.js";
+const express = require("express");
+const pool = require("../db.js");
 
-
-const router = Router();
+const router = express.Router();
 
 router.get("/ping", async (req, res) => {
-   const [rows] = await pool.query("SELECT * FROM cosas");
-   console.log(rows);
-   res.json(rows);
-   
-})
+   try {
+       const [rows] = await pool.query("SELECT * FROM cosas");
+       console.log(rows);
+       res.json(rows);
+   } catch (error) {
+       console.error("Error al obtener datos:", error);
+       res.status(500).send("Error interno del servidor");
+   }
+});
 
-
-export default router;
+module.exports = router;
